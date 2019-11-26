@@ -1,0 +1,1 @@
+Kt-200Mp Used vanilla CFR for the first 30M its, then trained 170 million iterations with pruning (prune(-10000)), at 23296.42 iterations per second.
