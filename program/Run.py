@@ -3,7 +3,7 @@ from KuhnGame import KuhnGame
 from KuhnTest import KuhnTest
 from KuhnTrainer import train
 
-# Train a game tree from scratch
+# Train a game tree from scratch. Theoretically, first player has game value -1/18.
 train(iterations=10 ** 6, saveName="kt-10M")
 # Continue training from a saved file
 # continueTrain('kt-10Mp', 90*10**6, 'kt-200Mp')
