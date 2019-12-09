@@ -110,7 +110,7 @@ def buildAverageStrategy():
 if __name__ == '__main__':
     # Read trained strategy
     my = KuhnTest()
-    my.read('kt-200Mp')
+    my.read('kt-3M')
     # Read trained strategy and value of game (theoretically should be -1/18)
     for node in my.nodeMap.values():
         print(node)

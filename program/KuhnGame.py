@@ -88,5 +88,5 @@ class KuhnGame():
 
 if __name__ == '__main__':
     game = KuhnGame()
-    game.read('kt-200Mp')
+    game.read('kt-3Mp')
     game.playAI(False, 0)

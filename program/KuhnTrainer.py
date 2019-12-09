@@ -168,6 +168,6 @@ def cfrPrune(cards: List[int], history: str, p0: float, p1: float) -> float:
 if __name__ == '__main__':
     import time
     start_time = time.time()
-    # train(3000000, "kttest")
-    continueTrain('kt-30Mp', 170*10**6, 'kt-200M')
+    # train(3 * 10 ** 6, "kt-3M")
+    continueTrain('kt-3Mp', 170*10**6, 'kt-200M')
     print("--- %s seconds ---" % (time.time() - start_time))
