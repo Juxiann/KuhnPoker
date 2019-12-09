@@ -38,6 +38,9 @@ def train(iterations: int, saveName):
         freq_print = 10 ** 5
         if i % (freq_print) == 0:
             print(f"Kuhn trained {i} iterations. {str(freq_print / (time.time() - t1))} iterations per second.")
+            my = KuhnTest()
+            my.nodeMap = nodeMap
+            print("Average game value: " + str(my.gameValue()))
             t1 = time.time()
     my = KuhnTest()
     my.nodeMap = nodeMap
