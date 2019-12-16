@@ -1,13 +1,12 @@
 import random
 from typing import *
-from blist import sorteddict
 from KuhnNode import KuhnNode
 import pickle, time
 from KuhnTest import KuhnTest
 
 NUM_ACTIONS = 2
 
-nodeMap = sorteddict()
+nodeMap = {}
 
 def continueTrain(file, iterations: int, saveName):
     kt = KuhnTest()
@@ -171,6 +170,6 @@ def cfrPrune(cards: List[int], history: str, p0: float, p1: float) -> float:
 if __name__ == '__main__':
     import time
     start_time = time.time()
-    # train(3 * 10 ** 6, "kt-3M")
-    continueTrain('kt-3Mp', 170*10**6, 'kt-200M')
+    train(3 * 10 ** 6, "kt-30Mp")
+    # continueTrain('kt-30Mp', 170*10**6, 'kt-200M')
     print("--- %s seconds ---" % (time.time() - start_time))

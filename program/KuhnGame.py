@@ -1,9 +1,9 @@
-from blist import sorteddict
+from typing import Dict
 import pickle, random
 from KuhnNode import KuhnNode
 
 class KuhnGame():
-    AI: sorteddict
+    AI: Dict
 
     def read(self, filepath: str):
         with open(filepath, 'rb') as f:
@@ -88,5 +88,5 @@ class KuhnGame():
 
 if __name__ == '__main__':
     game = KuhnGame()
-    game.read('kt-3Mp')
+    game.read('kt-200Mp')
     game.playAI(False, 0)

@@ -1,10 +1,8 @@
-from blist import sorteddict
 import pickle, random
 from KuhnNode import KuhnNode
 
-
 class KuhnTest():
-    nodeMap: sorteddict
+    nodeMap: dict
 
     def read(self, filepath: str):
         with open(filepath, 'rb') as f:
@@ -12,7 +10,7 @@ class KuhnTest():
 
     # Plays the game against the strategy testNodeMap from a given history,
     # returns the utility of playing the simulated game.
-    def test_play(self, testNodeMap: sorteddict, history: str):
+    def test_play(self, testNodeMap: dict, history: str):
         cards = [1, 2, 3]
         random.shuffle(cards)
         plays = len(history)
@@ -81,9 +79,31 @@ class KuhnTest():
                         value += -valueRecursive(self, otherInfo + 'b') * strategy[a]
                 return value
 
+
         for cards in cardList:
             value += valueRecursive(self, str(cards[0])) / 6
         return value
+
+    def exploitability(self) -> list:
+        gt = self.best_response()
+        output = [0, 0]
+        for c in range(1, 4):
+            output[0] -= gt[str(c)]['ev']
+            output[1] += gt[str(c)]['br']
+        return output
+
+    def best_response(self) -> dict:
+        '''
+        Returns the expected value of current infoSet, assuming opponents play by the best response.
+        ev corresponds to the expected value of a
+        node, calculated by the sum of expected value of child nodes, weighted
+        by probability of choosing that action (assumes opponent plays by the best response.
+        br corresponds to the value of a node, calculated assuming current player
+        plays by the best response.
+        :param p1: The product of p1's action probabilities.
+        :param p2: The product of p2's action probabilities.
+        '''
+    pass
 
     def prune(self, threshold: str):
         for item in self.nodeMap:
@@ -93,7 +113,7 @@ class KuhnTest():
                     self.nodeMap[item].promising_branches.remove(i)
 
 def buildAverageStrategy():
-    nodeMap = sorteddict()
+    nodeMap = {}
     for card in range(1, 4):
         history = str(card)
         infoSet = history
@@ -109,12 +129,13 @@ def buildAverageStrategy():
 
 if __name__ == '__main__':
     # Read trained strategy
+    import os
     my = KuhnTest()
-    my.read('kt-3M')
+    my.read(os.getcwd() + '/kt-10M')
     # Read trained strategy and value of game (theoretically should be -1/18)
     for node in my.nodeMap.values():
         print(node)
-    print(my.gameValue())
-
-    # my.nodeMap = buildAverageStrategy()
-    # print(my.gameValue())
+    gameTree = my.best_response()
+    print(gameTree)
+    print(my.exploitability())
+    # print(sum(gameTree[str(c)] / 3 for c in range(1, 4)))
