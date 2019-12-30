@@ -34,12 +34,13 @@ def train(iterations: int, saveName):
         random.shuffle(cards)
         util += cfr(cards, '', 1, 1)
         # Progress
-        freq_print = 10 ** 5
+        freq_print = 100000
         if i % (freq_print) == 0:
             print(f"Kuhn trained {i} iterations. {str(freq_print / (time.time() - t1))} iterations per second.")
             my = KuhnTest()
             my.nodeMap = nodeMap
             print("Average game value: " + str(my.gameValue()))
+            print(f"Total exploitability: {sum(my.exploitability())}")
             t1 = time.time()
     my = KuhnTest()
     my.nodeMap = nodeMap
@@ -47,6 +48,7 @@ def train(iterations: int, saveName):
     for node in nodeMap.values():
         print(node)
     print("Average game value: " + str(my.gameValue()))
+    # print("Total exploitability: "+ str(sum(my.exploitability()[a] for a in range(2))))
     # Save the trained algorithm
     with open(saveName, 'wb') as f:
         pickle.dump(nodeMap, f)
@@ -64,7 +66,10 @@ def trainPrune(iterations: int, savePath):
         util += cfrPrune(cards, '', 1, 1)
         # Progress
         if i % (10 ** 5) == 0:
+            my = KuhnTest()
+            my.nodeMap = nodeMap
             print(f"Kuhn trained {i} iterations. {str(10 ** 5 / (time.time() - t1))} iterations per second.")
+            print(f"Total exploitability: {sum(my.exploitability())}")
             t1 = time.time()
     my = KuhnTest()
     my.nodeMap = nodeMap
@@ -170,6 +175,6 @@ def cfrPrune(cards: List[int], history: str, p0: float, p1: float) -> float:
 if __name__ == '__main__':
     import time
     start_time = time.time()
-    train(3 * 10 ** 6, "kt-30Mp")
+    train(10 ** 6, "kt-10")
     # continueTrain('kt-30Mp', 170*10**6, 'kt-200M')
     print("--- %s seconds ---" % (time.time() - start_time))

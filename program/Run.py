@@ -3,12 +3,12 @@ from KuhnGame import KuhnGame
 from KuhnTest import KuhnTest
 from KuhnTrainer import train, continueTrain
 
-# Train a game tree from scratch, theoretical game value should be -1/18.
+# Train a game tree from scratch
 train(iterations=10 ** 6, saveName="kt-10M")
 # Continue training from a saved file
 # continueTrain('kt-10M', 90*10**6, 'kt-100M')
 kt = KuhnTest()
-kt.read(filepath="kt-3M")
+kt.read(filepath="kt-10M")
 print(kt.gameValue())
 
 # Play against trained game tree
