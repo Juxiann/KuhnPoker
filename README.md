@@ -2,7 +2,8 @@
 An implementation of CFR algorithm to solve Kuhn Poker. 
 
 Contains a script to play the game against a trained AI. 
-Contains a function to compute the exploitability ("goodness") of a strategy.
+
+Contains a function to compute the exploitability of a strategy.
 # Khun Poker Description
 See wikipedia page https://en.wikipedia.org/wiki/Kuhn_poker
 
