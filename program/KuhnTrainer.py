@@ -36,11 +36,13 @@ def train(iterations: int, saveName):
         # Progress
         freq_print = 100000
         if i % (freq_print) == 0:
-            print(f"Kuhn trained {i} iterations. {str(freq_print / (time.time() - t1))} iterations per second.")
+            if time.time() - t1 != 0.:
+                print(f"Kuhn trained {i} iterations. {str(freq_print / (time.time() - t1))} iterations per second.")
             my = KuhnTest()
             my.nodeMap = nodeMap
             print("Average game value: " + str(my.gameValue()))
-            print(f"Total exploitability: {sum(my.exploitability())}")
+            print(my.exploitability())
+            print(f"Total exploitability: {-sum(my.exploitability())}")
             t1 = time.time()
     my = KuhnTest()
     my.nodeMap = nodeMap
