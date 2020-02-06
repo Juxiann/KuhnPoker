@@ -41,7 +41,7 @@ def train(iterations: int, saveName):
             my = KuhnTest()
             my.nodeMap = nodeMap
             print("Average game value: " + str(my.gameValue()))
-            print(my.exploitability())
+            print(f"Worst case game value: {my.exploitability()}")
             print(f"Total exploitability: {-sum(my.exploitability())}")
             t1 = time.time()
     my = KuhnTest()
